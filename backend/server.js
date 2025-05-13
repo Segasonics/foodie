@@ -29,7 +29,7 @@ app.use('/api/v1/users',userRoute);
 app.use('/api/v1/recipes',recipeRoute);
 
 // Catch-all for unmatched API routes (must be after the routes above)
-app.all('/api/*', (req, res) => {
+app.all('/api/{*splat}', (req, res) => {
   res.status(404).json({ message: 'API route not found' });
 });
 
@@ -37,7 +37,7 @@ if(process.env.NODE_ENV === "production"){
     app.use(express.static(path.join(__dirname,'/frontend/dist')));
 }
 
-app.get('*',(req,res)=>{
+app.get('/{*splat}',(req,res)=>{
     res.sendFile(path.resolve(__dirname,"frontend","dist","index.html"));
 })
 app.listen(PORT,()=>{
