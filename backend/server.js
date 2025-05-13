@@ -3,6 +3,7 @@ import dotenv from 'dotenv'
 import { connectDB } from './db/connectDB.js';
 import cookieParser from 'cookie-parser';
 import cors from 'cors'
+import path from 'path';
 import { fileURLToPath } from 'url';
 
 dotenv.config()
