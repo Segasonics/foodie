@@ -27,7 +27,7 @@ export const useRecipeStore=create((set)=>({
     getRecipesByCategory:async(category)=>{
         set({loading:true});
         try {
-            const res = await axios.get(`${API_URL}/recipe/${category}`);
+            const res = await axios.get(`${API_URL}/category/${category}`);
             set({recipes:res.data.recipes,loading:false})
         } catch (error) {
             set({loading:false});
