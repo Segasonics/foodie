@@ -8,8 +8,12 @@ const CategoriesPage = () => {
   const { getRecipesByCategory, recipes, loading } = useRecipeStore()
 
   useEffect(() => {
+  if (categoryName) {
     getRecipesByCategory(categoryName)
-  }, [categoryName])
+  } else {
+    console.log('No category specified');
+  }
+}, [categoryName]);
 
   return (
     <section className="py-16 px-4 max-w-7xl mx-auto">

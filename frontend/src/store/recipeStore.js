@@ -54,15 +54,15 @@ export const useRecipeStore=create((set)=>({
             console.log(error.response.data.message)
         }
     },
-    getLimitedRecipesByCategory:async(category)=>{
-        set({loading:true});
-        try {
-            const res = await axios.get(`${API_URL}/limitedcatrecipes/${category}`);
-            set({recipes:res.data.recipes,loading:false})
-        } catch (error) {
-            set({loading:false});
-            console.log(error.response.data.message)
-        }
-    },
+    // getLimitedRecipesByCategory:async(category)=>{
+    //     set({loading:true});
+    //     try {
+    //         const res = await axios.get(`${API_URL}/limitedcatrecipes/${category}`);
+    //         set({recipes:res.data.recipes,loading:false})
+    //     } catch (error) {
+    //         set({loading:false});
+    //         console.log(error.response.data.message)
+    //     }
+    // },
 
 }))
