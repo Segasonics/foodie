@@ -10,6 +10,6 @@ router.route('/featuredRecipe').get(getFeaturedRecipes);
 router.route('/limitedcatrecipes/:category').get(getLimitedProductsByCategory)
 
 
-router.route('/:category').get(getRecipesByCategory);
+router.route('/recipe/:category').get(getRecipesByCategory);
 
 export default router
