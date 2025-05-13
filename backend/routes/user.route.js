@@ -10,5 +10,5 @@ router.route('/logout').post(logout)
 
 router.route('/verify-email').post(verifyEmail)
 router.route('/forgot-password').post(forgotPassword)
-router.route('/reset-password/:token').post(resetPassword)
+//router.route('/reset-password/:token').post(resetPassword)
 export default router
