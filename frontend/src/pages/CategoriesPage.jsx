@@ -4,20 +4,20 @@ import { useRecipeStore } from '../store/recipeStore'
 import CardsSkeleton from '../components/skeleton/CardsSkeleton'
 
 const CategoriesPage = () => {
-  const { categoryName } = useParams()
+  const { category } = useParams()
   const { getRecipesByCategory, recipes, loading } = useRecipeStore()
 
   useEffect(() => {
-  if (categoryName) {
-    getRecipesByCategory(categoryName)
+  if (category) {
+    getRecipesByCategory(category)
   } else {
     console.log('No category specified');
   }
-}, [categoryName]);
+}, [category]);
 
   return (
     <section className="py-16 px-4 max-w-7xl mx-auto">
-      <h2 className="text-3xl text-center font-bold mb-6 pt-4 capitalize">{categoryName} Recipes</h2>
+      <h2 className="text-3xl text-center font-bold mb-6 pt-4 capitalize">{category} Recipes</h2>
 
       {loading ? (
         <CardsSkeleton />

@@ -15,7 +15,7 @@ function App() {
     <Navbar /> 
       <Routes>
         <Route path='/' element={<Homepage />} />
-        <Route path='/category/:categoryName' element={<CategoriesPage />} />
+        <Route path='/category/:category' element={<CategoriesPage />} />
         <Route path='/signup' element={<SignUpPage />} />
         <Route path='/login' element={<LoginPage />} />
         <Route path='/verify-email' element={<EmailVerificationPage />} />

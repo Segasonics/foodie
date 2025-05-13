@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react'
+import {useEffect} from 'react'
 import { useRecipeStore } from '../store/recipeStore'
 import CardsSkeleton from './skeleton/CardsSkeleton';
 
