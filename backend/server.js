@@ -3,14 +3,15 @@ import dotenv from 'dotenv'
 import { connectDB } from './db/connectDB.js';
 import cookieParser from 'cookie-parser';
 import cors from 'cors'
-import path from "path"
+import { fileURLToPath } from 'url';
 
 dotenv.config()
 const app = express();
 
 
 const PORT=process.env.PORT || 8000;
-const __dirname = path.resolve()
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ limit: '10mb', extended: true }));
@@ -32,9 +33,9 @@ app.use('/api/v1/recipes',recipeRoute);
 app.all('/api/{*splat}', (req, res) => {
   res.status(404).json({ message: 'API route not found' });
 });
-
-if(process.env.NODE_ENV === "production"){
-    app.use(express.static(path.join(__dirname,'/frontend/dist')));
+// Serve frontend in production
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, '../frontend/dist')));
 }
 
 app.get(/^\/(?!api\/).*/, (req, res) => {
