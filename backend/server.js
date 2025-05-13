@@ -28,6 +28,11 @@ import recipeRoute from './routes/recipe.route.js'
 app.use('/api/v1/users',userRoute);
 app.use('/api/v1/recipes',recipeRoute);
 
+// Catch-all for unmatched API routes (must be after the routes above)
+app.all('/api/*', (req, res) => {
+  res.status(404).json({ message: 'API route not found' });
+});
+
 if(process.env.NODE_ENV === "production"){
     app.use(express.static(path.join(__dirname,'/frontend/dist')));
 }

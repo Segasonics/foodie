@@ -21,7 +21,7 @@ export const useRecipeStore=create((set)=>({
 			});
         } catch (error) {
            set({loading:false});
-           console.log(error?.response?.data.message)
+           console.log(error?.response?.data?.message)
         }
     },
     getRecipesByCategory:async(category)=>{
@@ -31,7 +31,7 @@ export const useRecipeStore=create((set)=>({
             set({recipes:res.data.recipes,loading:false})
         } catch (error) {
             set({loading:false});
-            console.log(error.response.data.message)
+            console.log(error?.response?.data?.message)
         }
     },
     getLimitedRecipes:async()=>{
@@ -41,7 +41,7 @@ export const useRecipeStore=create((set)=>({
             set({recipes:res.data.recipes,loading:false})
         } catch (error) {
             set({loading:false});
-            console.log(error.response.data.message)
+            console.log(error?.response?.data?.message)
         }
     },
     getFeaturedRecipes:async()=>{
@@ -51,7 +51,7 @@ export const useRecipeStore=create((set)=>({
             set({recipes:res.data.featuredRecipes,loading:false})
         } catch (error) {
             set({loading:false});
-            console.log(error.response.data.message)
+            console.log(error?.response?.data?.message)
         }
     },
     // getLimitedRecipesByCategory:async(category)=>{
