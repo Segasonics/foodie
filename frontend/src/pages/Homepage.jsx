@@ -1,10 +1,10 @@
 import React, { Suspense } from 'react'
 import LatestRecipes from '../components/LatestRecipes'
-import FeaturedCollections from '../components/FeaturedCollections'
 import Newsletter from '../components/Newsletter'
 import Herosection from '../components/Herosection'
 import FoodCategorySkeleton from '../components/skeleton/FoodCategorySkeleton'
-const FoodCategory=React.lazy(()=>import('../components/FoodCategory'))
+const FoodCategory=React.lazy(()=>import('../components/FoodCategory'));
+const FeaturedCollections=React.lazy(()=>import('../components/FeaturedCollections'))
 const Homepage = () => {
   return (
     <div className='min-h-screen bg-white font-sans'>
@@ -13,7 +13,9 @@ const Homepage = () => {
         <FoodCategory />
       </Suspense>
       <LatestRecipes />
+       <Suspense fallback={<FoodCategorySkeleton />}>
       <FeaturedCollections />
+      </Suspense>
       <Newsletter />
     </div>
   )
