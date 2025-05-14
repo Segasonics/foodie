@@ -35,13 +35,14 @@ app.all('/api/{*splat}', (req, res) => {
   res.status(404).json({ message: 'API route not found' });
 });
 // Serve frontend in production
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, '..', 'frontend', 'dist')));
-}
 
-app.get(/^\/(?!api\/).*/, (req, res) => {
-      res.sendFile(path.resolve(__dirname, '..', 'frontend', 'dist', 'index.html'));
-  });
+if(process.env.NODE_ENV ==="production"){
+    app.use(express.static(path.join(__dirname,"../frontend/dist")));
+
+    app.get("*",(req,res)=>{
+        res.sendFile(path.join(__dirname,"../frontend","dist","index.html"))
+    })
+}
 
 app.listen(PORT,()=>{
     connectDB();
