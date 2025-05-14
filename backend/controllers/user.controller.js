@@ -1,7 +1,7 @@
 import { generateTokenAndSetCookie, generateVerificationCode } from "../utils/generateVerificationCode.js"
 import { User } from "../models/user.model.js"
 import bcrypt from "bcryptjs"
-import { sendPasswordResetEmail, sendResetSuccessEmail, sendVerificationEmail, sendWelcomeEmail } from "../mailtrap/emails.js"
+import { sendPasswordResetEmail, sendResetSuccessEmail, sendVerificationEmail, sendWelcomeEmail, subscribeToNewsLetter } from "../mailtrap/emails.js"
 import crypto from 'crypto'
 
 //signup controller
@@ -188,3 +188,23 @@ export const checkAuth = async (req, res) => {
 		res.status(400).json({ success: false, message: error.message });
 	}
 };
+
+//newsletter controller
+export const newsLetter=async(req,res)=>{
+    const {email}=req.body;
+     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    return res.status(400).json({
+      success: false,
+      message: "Please enter a valid email address.",
+    });
+  }
+    try {
+        await subscribeToNewsLetter(email);
+        return res.status(200).json({
+            message:"Subscribe to newsletter"
+        })
+    } catch (error) {
+        console.log("Error in newsletter ", error);
+		res.status(400).json({ success: false, message: error.message });
+    }
+}

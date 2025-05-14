@@ -95,4 +95,18 @@ export const useAuthStore = create((set) => ({
 	// 		throw error;
 	// 	}
 	// },
+
+	subscribeToNewsLetter: async (email) => {
+		set({ isLoading: true });
+		try {
+			const response = await axios.post(`${API_URL}/newsletter`,{ email});
+            console.log(response)
+			set({isLoading:false})
+		} catch (error) {
+			set({
+				isLoading: false,
+				error: error.response.data.message || "Error sending reset password email",
+			});
+		}
+	}
 }));

@@ -50,10 +50,8 @@ export const getRecipesByCategory = async (req, res) => {
 
 //get a limited number of recipes
 export const getLimitedReceipts = async (req, res) => {
-    console.log("getlimitedreceipts hit")
     try {
         const recipes = await Recipe.find({}).limit(6).exec();;
-        console.log("limited recipes", recipes)
         if (recipes.length === 0) {
             return res.status(400).json({ success: false, message: "No recipes found" })
         }

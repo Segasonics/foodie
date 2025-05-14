@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { useRecipeStore } from '../store/recipeStore'
 import CardsSkeleton from '../components/skeleton/CardsSkeleton'
