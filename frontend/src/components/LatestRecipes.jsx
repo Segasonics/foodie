@@ -11,7 +11,6 @@ import './swiperOverride.css';
 
 const LatestRecipes = () => {
     const{getLimitedRecipes,recipes}=useRecipeStore();
-    console.log(recipes)
     const getLatestRecipes=async()=>{
          await getLimitedRecipes()
     }

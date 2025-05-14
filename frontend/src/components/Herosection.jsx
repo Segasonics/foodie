@@ -1,57 +1,66 @@
-import React, { useEffect ,useRef,useState} from 'react'
-import foodie from '../assets/videos/foodie.mp4'
-import Navbar from './Navbar';
-import heroImg from '../assets/heroImg.png'
-const Herosection = () => {
-    const [searchQuery, setSearchQuery] = useState('');
-    const videoRef = useRef(null);
-    useEffect(() => {
-        if (videoRef.current) {
-            videoRef.current.play().catch(error => {
-                console.error("Video autoplay failed:", error);
-            });
-        }
-    }, []);
-    return (
-        <>
-            <section id='home' className="relative h-[600px] overflow-hidden">
-                <div className="absolute inset-0 bg-black/50 z-10"></div>
-                <video
-                    poster={heroImg}
-                    preload='none'
-                    ref={videoRef}
-                    className="absolute inset-0 w-full h-full object-cover"
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                >
-                    <source src={foodie} type="video/mp4" />
-                    Your browser does not support the video tag.
-                </video>
-                <div className="relative z-20 h-full flex flex-col items-center justify-center text-white px-4 max-w-7xl mx-auto">
-                    <h1 className="text-5xl md:text-6xl font-serif font-bold mb-4 text-center">Share Your Culinary Journey</h1>
-                    <p className="text-xl md:text-2xl mb-8 text-center max-w-3xl">Discover, create and share delicious recipes from around the world</p>
-                    <div className="relative w-full max-w-2xl">
-                        <input
-                            type="text"
-                            name="herosection"
-                            placeholder="Search for recipes, ingredients, or cuisines..."
-                            className="w-full py-4 px-6 pr-12 rounded-full border-2xl outline-2 text-white-800 text-lg shadow-lg focus:outline-none focus:ring-2 focus:ring-yellow-500"
-                            value={searchQuery}
-                            onChange={(e) => setSearchQuery(e.target.value)}
-                        />
-                        <button className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-600 cursor-pointer !rounded-button whitespace-nowrap">
-                            <i className="fas fa-search text-xl"></i>
-                        </button>
-                    </div>
-                    <div className="absolute bottom-8 animate-bounce">
-                        <i className="fas fa-chevron-down text-2xl"></i>
-                    </div>
-                </div>
-            </section>
-        </>
-    )
-}
+import { useEffect, useRef } from 'react';
+import foodie from '../assets/videos/foodie.mp4';
+import heroImg from '../assets/heroImg.png';
+import { usePaymentStore } from '../store/paymentStore';
 
-export default Herosection
+
+const Herosection = () => {
+  const videoRef = useRef(null);
+  const {createCheckout}=usePaymentStore();
+
+  const handleCheckout=async(priceId)=>{
+    await createCheckout(priceId)
+  }
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.play().catch(error => {
+        console.error("Video autoplay failed:", error);
+      });
+    }
+  }, []);
+
+  return (
+    <>
+      <section id='home' className="relative h-[600px] overflow-hidden">
+        <div className="absolute inset-0 bg-black/60 z-10"></div>
+        <video
+          poster={heroImg}
+          preload="none"
+          ref={videoRef}
+          className="absolute inset-0 w-full h-full object-cover"
+          autoPlay
+          muted
+          loop
+          playsInline
+        >
+          <source src={foodie} type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+
+        <div className="relative z-20 h-full flex flex-col items-center justify-center text-white px-4 max-w-7xl mx-auto text-center">
+          <h1 className="text-5xl md:text-6xl font-serif font-bold mb-4 drop-shadow-lg">Share Your Culinary Journey</h1>
+          <p className="text-xl md:text-2xl mb-6 max-w-3xl drop-shadow-md">
+            Discover, create, and share delicious recipes from around the world.
+          </p>
+
+          <div className="backdrop-blur-sm bg-white/10 border border-white/20 rounded-xl p-6 max-w-md w-full shadow-lg">
+            <p className="text-lg md:text-xl font-medium mb-4">Subscribe for 1 year to unlock full access to all recipes and premium features</p>
+            <button
+              onClick={()=> handleCheckout('price_1ROegmSAVs3IUb6BTGBEIWmW')}
+              className="bg-yellow-400 cursor-pointer hover:bg-yellow-500 text-black font-bold py-3 px-8 rounded-full shadow-md transition-all duration-300 hover:scale-105"
+            >
+              Subscribe Now
+            </button>
+          </div>
+
+          <div className="absolute bottom-8 animate-bounce">
+            <i className="fas fa-chevron-down text-2xl text-white"></i>
+          </div>
+        </div>
+      </section>
+    </>
+  );
+};
+
+export default Herosection;

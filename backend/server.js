@@ -26,9 +26,12 @@ app.use(cors({
 import userRoute from './routes/user.route.js';
 //recipe routes
 import recipeRoute from './routes/recipe.route.js'
+//payment routes
+import paymentRoutes from './routes/payment.route.js'
 
 app.use('/api/v1/users',userRoute);
 app.use('/api/v1/recipes',recipeRoute);
+app.use('/api/v1/payments',paymentRoutes)
 
 // Catch-all for unmatched API routes (must be after the routes above)
 app.all('/api/{*splat}', (req, res) => {

@@ -7,6 +7,7 @@ import Navbar from './components/Navbar'
 import EmailVerificationPage from './pages/EmailVerificationPage'
 import CategoriesPage from './pages/CategoriesPage'
 import AdminPage from './pages/AdminPage'
+import PlansPage from './pages/PlansPage'
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
         <Route path='/login' element={<LoginPage />} />
         <Route path='/verify-email' element={<EmailVerificationPage />} />
         <Route path='/admin' element={<AdminPage />} />
+        <Route path='/plans' element={<PlansPage />} />
       </Routes>
       <Footer />
     </>
