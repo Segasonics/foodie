@@ -2,14 +2,24 @@ import { useEffect, useRef } from 'react';
 import foodie from '../assets/videos/foodie.mp4';
 import heroImg from '../assets/heroImg.png';
 import { usePaymentStore } from '../store/paymentStore';
-
+import { useAuthStore } from '../store/authStore';
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 const Herosection = () => {
   const videoRef = useRef(null);
   const {createCheckout}=usePaymentStore();
+  const {user}=useAuthStore();
+  const navigate =useNavigate()
 
   const handleCheckout=async(priceId)=>{
-    await createCheckout(priceId)
+    if(!user){
+      navigate('/login')
+      toast.error("Login or Signup to subscribe")
+    }else{
+     await createCheckout(priceId)
+    }
+
   }
 
   useEffect(() => {

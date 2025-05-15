@@ -23,9 +23,6 @@ const LatestRecipes = () => {
             <div className="max-w-7xl mx-auto">
                 <div className="flex justify-between items-center mb-12">
                     <h2 className="text-4xl font-serif font-bold">Latest Recipes</h2>
-                    {/* <a href="#" className="text-yellow-600 hover:text-yellow-700 font-medium flex items-center cursor-pointer rounded-md whitespace-nowrap">
-                        View All <FaArrowRight className="ml-2" />
-                    </a> */}
                 </div>
                 <Swiper
                     modules={[Pagination, Autoplay]}

@@ -1,4 +1,4 @@
-import { Routes,Route } from 'react-router-dom'
+import { Routes,Route,Navigate } from 'react-router-dom'
 import Homepage from './pages/Homepage'
 import Footer from './components/Footer'
 import SignUpPage from './pages/SignUpPage'
@@ -8,9 +8,13 @@ import EmailVerificationPage from './pages/EmailVerificationPage'
 import CategoriesPage from './pages/CategoriesPage'
 import AdminPage from './pages/AdminPage'
 import PlansPage from './pages/PlansPage'
+import PurchaseSuccessPage from './pages/PurchaseSuccessPage'
+import { useAuthStore } from './store/authStore'
+import PurchaseCancelPage from './pages/PurchaseCancelPage'
+import { Toaster } from 'react-hot-toast'
 
 function App() {
-
+    const {user} =useAuthStore()
   return (
     <> 
     <Navbar /> 
@@ -21,9 +25,12 @@ function App() {
         <Route path='/login' element={<LoginPage />} />
         <Route path='/verify-email' element={<EmailVerificationPage />} />
         <Route path='/admin' element={<AdminPage />} />
-        <Route path='/plans' element={<PlansPage />} />
+        <Route path='/plans' element={user ?<PlansPage /> :<Navigate to='/' />} />
+        <Route path='/purchase-success' element={<PurchaseSuccessPage />} />
+        <Route path='/purchase-cancel' element={<PurchaseCancelPage />}/>
       </Routes>
       <Footer />
+      <Toaster />
     </>
   )
 }

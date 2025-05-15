@@ -25,5 +25,5 @@ export const usePaymentStore=create((set)=>({
        } catch (error) {
         console.error('Checkout error:', error.response?.data || error.message);
        }
-    }
+    },
 }))

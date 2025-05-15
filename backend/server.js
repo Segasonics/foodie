@@ -14,6 +14,9 @@ const PORT=process.env.PORT || 8000;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+//webhook
+app.post('/api/v1/webhooks/payments', express.raw({ type: 'application/json' }), stripeWebhook)
+
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ limit: '10mb', extended: true }));
 app.use(cookieParser())
@@ -28,10 +31,12 @@ import userRoute from './routes/user.route.js';
 import recipeRoute from './routes/recipe.route.js'
 //payment routes
 import paymentRoutes from './routes/payment.route.js'
+import { stripeWebhook } from './controllers/webhook.controller.js';
+
 
 app.use('/api/v1/users',userRoute);
 app.use('/api/v1/recipes',recipeRoute);
-app.use('/api/v1/payments',paymentRoutes)
+app.use('/api/v1/payments',paymentRoutes);
 
 // Catch-all for unmatched API routes (must be after the routes above)
 app.all('/api/{*splat}', (req, res) => {
