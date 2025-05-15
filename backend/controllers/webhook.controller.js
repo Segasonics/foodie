@@ -3,8 +3,7 @@ import { stripe } from "../utils/stripe.js";
 
 export const stripeWebhook = async (req, res) => {
   const sig = req.headers['stripe-signature'];
-  console.log("Stripe Signature:", sig);
-  console.log("Raw Body:", req.body);
+
   let event;
   try {
     event = stripe.webhooks.constructEvent(req.body, sig, process.env.STRIPE_WEBHOOK_SECRET);
@@ -12,21 +11,40 @@ export const stripeWebhook = async (req, res) => {
     console.error('Webhook signature verification failed:', err.message);
     return res.status(400).send(`Webhook Error: ${err.message}`);
   }
+
   console.log('Webhook received:', event.type);
-  // Handle checkout.session.completed
+
   if (event.type === 'checkout.session.completed') {
     const session = event.data.object;
-    console.log("Checkout session completed:", session);
+    const userId = session.metadata?.userId;
+    console.log("Checkout session completed for user:", userId);
+
+    if (userId) {
+      try {
+        await User.findByIdAndUpdate(userId, { isSubscribed: true });
+        console.log(`Subscription activated for user ${userId}`);
+      } catch (err) {
+        console.error('Error updating user (checkout.session.completed):', err);
+      }
+    }
+  }
+
+  if (event.type === 'customer.subscription.created') {
+    const subscription = event.data.object;
+    const customerId = subscription.customer;
+
     try {
-      const userId = session.metadata.userId;
+      const customer = await stripe.customers.retrieve(customerId);
+      const userId = customer.metadata?.userId;
 
-      await User.findByIdAndUpdate(userId, {
-        isSubscribed: true,
-      });
-
-      console.log(`Subscription activated for user ${userId}`);
+      if (userId) {
+        await User.findByIdAndUpdate(userId, { isSubscribed: true });
+        console.log(`Subscription activated via customer.subscription.created for user ${userId}`);
+      } else {
+        console.warn('No userId in customer metadata');
+      }
     } catch (err) {
-      console.error('Error updating user subscription:', err);
+      console.error('Error updating user (customer.subscription.created):', err);
     }
   }
 
