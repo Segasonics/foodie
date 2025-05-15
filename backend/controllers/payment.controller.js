@@ -21,8 +21,6 @@ export const createCheckoutSession = async (req, res) => {
                 plan:'1-year-plan'
             }
         });
-
-        console.log("session", session);
         res.status(200).json({ id: session.id, })
     } catch (error) {
         console.log("Error processing checkout :", error);
