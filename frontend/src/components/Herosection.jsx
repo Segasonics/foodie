@@ -58,9 +58,10 @@ const Herosection = () => {
             <p className="text-lg md:text-xl font-medium mb-4">Subscribe for 1 year to unlock full access to all recipes and premium features</p>
             <button
               onClick={()=> handleCheckout('price_1ROegmSAVs3IUb6BTGBEIWmW')}
+              disabled={user.isSubscribed === true}
               className="bg-yellow-400 cursor-pointer hover:bg-yellow-500 text-black font-bold py-3 px-8 rounded-full shadow-md transition-all duration-300 hover:scale-105"
             >
-              Subscribe Now
+              {user.isSubscribed ? '✓ Subscribed' :'Subscribe Now'}
             </button>
           </div>
 
