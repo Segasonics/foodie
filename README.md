@@ -37,5 +37,5 @@
 
 ### 1. Clone the Repo
 ```bash
-[git clone https://github.com/your-username/foodie.git](https://github.com/Segasonics/foodie.git)
+(https://github.com/Segasonics/foodie.git)
 cd foodie
