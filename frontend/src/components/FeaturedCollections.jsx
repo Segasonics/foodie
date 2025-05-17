@@ -1,6 +1,7 @@
 import {useEffect} from 'react'
 import { useRecipeStore } from '../store/recipeStore'
 import CardsSkeleton from './skeleton/CardsSkeleton';
+import { Link } from 'react-router-dom';
 
 const FeaturedCollections = () => {
     const {getFeaturedRecipes,recipes,loading}=useRecipeStore();
@@ -19,7 +20,7 @@ const FeaturedCollections = () => {
                (<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     
                     {recipes.map((recipe, index) => (
-                        <div key={index} className="rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 cursor-pointer">
+                        <div key={index} className="rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
                             <div className="h-64 relative overflow-hidden">
                                 <img
                                     src={recipe.image}
@@ -37,9 +38,6 @@ const FeaturedCollections = () => {
                                     <span className="text-sm text-gray-500">
                                         <i className="fas fa-utensils mr-1"></i> {recipe.category}
                                     </span>
-                                    <button className="text-yellow-600 hover:text-yellow-700 font-medium cursor-pointer !rounded-button whitespace-nowrap">
-                                        View Collection
-                                    </button>
                                 </div>
                             </div>
                         </div>

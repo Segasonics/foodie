@@ -60,7 +60,7 @@ const Herosection = () => {
               onClick={()=> handleCheckout('price_1ROegmSAVs3IUb6BTGBEIWmW')}
               className="bg-yellow-400 cursor-pointer hover:bg-yellow-500 text-black font-bold py-3 px-8 rounded-full shadow-md transition-all duration-300 hover:scale-105"
             >
-              Subscribe Now
+             {user && user?.isSubscribed ? '✓ Subscribed' : ' Subscribe Now '}
             </button>
           </div>
 
