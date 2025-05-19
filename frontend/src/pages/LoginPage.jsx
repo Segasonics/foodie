@@ -54,7 +54,14 @@ const LoginPage = () => {
 							<Link to='/forgot-password' className='text-sm text-yellow-500 hover:underline'>
 								Forgot password?
 							</Link>
+
 						</div>
+						<p className='text-sm text-gray-200 hover:underline'>
+							demo gmail:segazgreat@gmail.com
+						</p>
+						<p className='text-sm text-gray-200 hover:underline'>
+							demo password:123456
+						</p>
 						{error && <p className='text-red-500 font-semibold mb-2'>{error}</p>}
 
 						<motion.button
