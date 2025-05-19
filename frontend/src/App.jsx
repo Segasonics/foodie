@@ -1,4 +1,4 @@
-import { Routes,Route,Navigate } from 'react-router-dom'
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import Homepage from './pages/Homepage'
 import Footer from './components/Footer'
 import SignUpPage from './pages/SignUpPage'
@@ -14,10 +14,14 @@ import PurchaseCancelPage from './pages/PurchaseCancelPage'
 import { Toaster } from 'react-hot-toast'
 
 function App() {
-    const {user} =useAuthStore()
+  const { user } = useAuthStore();
+  const location = useLocation();
+  const hideFooterRoutes = ['/login', '/signup'];
+
+  const shouldShowFooter = !hideFooterRoutes.includes(location.pathname);
   return (
-    <> 
-    <Navbar /> 
+    <>
+      <Navbar />
       <Routes>
         <Route path='/' element={<Homepage />} />
         <Route path='/category/:category' element={<CategoriesPage />} />
@@ -25,11 +29,11 @@ function App() {
         <Route path='/login' element={<LoginPage />} />
         <Route path='/verify-email' element={<EmailVerificationPage />} />
         <Route path='/admin' element={<AdminPage />} />
-        <Route path='/plans' element={user ?<PlansPage /> :<Navigate to='/' />} />
+        <Route path='/plans' element={user ? <PlansPage /> : <Navigate to='/' />} />
         <Route path='/purchase-success' element={<PurchaseSuccessPage />} />
-        <Route path='/purchase-cancel' element={<PurchaseCancelPage />}/>
+        <Route path='/purchase-cancel' element={<PurchaseCancelPage />} />
       </Routes>
-      <Footer />
+       {shouldShowFooter && <Footer />}
       <Toaster />
     </>
   )

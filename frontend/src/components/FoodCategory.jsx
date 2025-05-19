@@ -2,6 +2,7 @@ import { categories } from '../assets/data'
 import { Link } from 'react-router-dom'
 
 const FoodCategory = () => {
+
   return (
     <>
       <section id="categories" className="py-16 px-4 max-w-7xl mx-auto">
