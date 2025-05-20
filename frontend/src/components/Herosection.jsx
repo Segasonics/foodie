@@ -59,7 +59,7 @@ const Herosection = () => {
             <button
               disabled={user && user.isSubscribed === true}
               onClick={()=> handleCheckout('price_1ROegmSAVs3IUb6BTGBEIWmW')}
-              className={`${user && user?.isSubscribed ?'bg-gray-500' :'bg-yellow-400'} cursor-pointer ${user && user?.isSubscribed ?'bg-gray-500':'hover:bg-yellow-500'}  text-black font-bold py-3 px-8 rounded-full shadow-md transition-all duration-300 ${user && user?.isSubscribed ?'' :'hover:scale-105'} `}
+              className={`${user && user?.isSubscribed ?'bg-gray-200 transition-none' :'bg-yellow-400 cursor-pointer hover:bg-yellow-500 transition-all duration-300 hover:scale-105'} text-black font-bold py-3 px-8 rounded-full shadow-md`}
             >
              {user && user?.isSubscribed ? '✓ Subscribed' : ' Subscribe Now '}
             </button>

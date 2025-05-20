@@ -12,11 +12,12 @@ import PurchaseSuccessPage from './pages/PurchaseSuccessPage'
 import { useAuthStore } from './store/authStore'
 import PurchaseCancelPage from './pages/PurchaseCancelPage'
 import { Toaster } from 'react-hot-toast'
+import ResetPasswordPage from './pages/ResetPasswordPage'
 
 function App() {
   const { user } = useAuthStore();
   const location = useLocation();
-  const hideFooterRoutes = ['/login', '/signup','/admin'];
+  const hideFooterRoutes = ['/login', '/signup','/admin','/forgot-password'];
 
   const shouldShowFooter = !hideFooterRoutes.includes(location.pathname);
   return (
@@ -32,6 +33,7 @@ function App() {
         <Route path='/plans' element={user ? <PlansPage /> : <Navigate to='/' />} />
         <Route path='/purchase-success' element={<PurchaseSuccessPage />} />
         <Route path='/purchase-cancel' element={<PurchaseCancelPage />} />
+        <Route path='/forgot-password' element={<ResetPasswordPage />} />
       </Routes>
        {shouldShowFooter && <Footer />}
       <Toaster />
