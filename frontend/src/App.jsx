@@ -16,7 +16,7 @@ import { Toaster } from 'react-hot-toast'
 function App() {
   const { user } = useAuthStore();
   const location = useLocation();
-  const hideFooterRoutes = ['/login', '/signup'];
+  const hideFooterRoutes = ['/login', '/signup','/admin'];
 
   const shouldShowFooter = !hideFooterRoutes.includes(location.pathname);
   return (
