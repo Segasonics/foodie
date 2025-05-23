@@ -45,6 +45,7 @@ const Navbar = () => {
             <button onClick={() => scrollToSection("categories")} className="hover:text-yellow-400 cursor-pointer transition duration-200">Categories</button>
             <button onClick={() => scrollToSection("recipes")} className="hover:text-yellow-400 cursor-pointer transition duration-200">Recipes</button>
             <button onClick={() => scrollToSection("features")} className="hover:text-yellow-400 cursor-pointer transition duration-200">Featured</button>
+           {user && user?.isSubscribed ? <Link to={import.meta.env.VITE_STRIPE_CUSTOMER_PORTAL}  className="hover:text-yellow-400 cursor-pointer transition duration-200">Customer Portal</Link>:""}
           </nav>
 
           {/* Desktop Auth Buttons */}

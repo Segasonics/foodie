@@ -1,7 +1,6 @@
 import {useEffect} from 'react'
 import { useRecipeStore } from '../store/recipeStore'
 import CardsSkeleton from './skeleton/CardsSkeleton';
-import { Link } from 'react-router-dom';
 
 const FeaturedCollections = () => {
     const {getFeaturedRecipes,recipes,loading}=useRecipeStore();

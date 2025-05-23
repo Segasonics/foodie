@@ -3,7 +3,7 @@ import { loadStripe } from '@stripe/stripe-js';
 import axios from "axios";
 
 const API_URL = import.meta.env.MODE === "development" ? "http://localhost:8000/api/v1/payments" : "/api/v1/payments"
-const stripePromise = loadStripe("pk_test_51OefRwSAVs3IUb6BUvOgC9L6Vr2VkEhhn0rkOTvp44Mbx0IjW9Z6s2WYrZrUgbGJTa1jx5CXsSrKF66wT9CuNdM300zNWoF8xN");
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
 export const usePaymentStore=create((set)=>({
     loading:false,

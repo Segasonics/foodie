@@ -1,12 +1,7 @@
-import { usePaymentStore } from '../store/paymentStore';
 import premium from '../assets/premium.jpg'
+import {Link} from 'react-router-dom';
 
 const PlansPage = () => {
-    const { createCheckout } = usePaymentStore();
-
-    const handleCheckout = async (priceId) => {
-        await createCheckout(priceId)
-    }
 
     return (
         <div className="bg-gradient-to-br from-yellow-100 via-white to-yellow-200 min-h-screen py-12 px-4 sm:px-6 lg:px-8 mt-20">
@@ -19,11 +14,11 @@ const PlansPage = () => {
                         <div className="text-xl font-semibold text-gray-700 mb-2 text-center">Premium</div>
                         <div className="text-2xl font-bold text-gray-900 text-center">₹200</div>
                         <div className="text-gray-500 mb-4 text-center">per year</div>
-                        <button
-                            onClick={() => handleCheckout('price_1ROegmSAVs3IUb6BTGBEIWmW')}
+                        <Link
+                            to={import.meta.env.VITE_STRIPE_YEARLY_PLAN_LINK}
                             className="w-full bg-yellow-500 text-black font-semibold py-2 cursor-pointer px-4 rounded-md hover:bg-yellow-600 transition duration-200">
                             Select
-                        </button>
+                        </Link>
                     </div>
                 </div>
             </div>
