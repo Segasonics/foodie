@@ -3,6 +3,7 @@ import foodie from '../assets/videos/foodie.mp4';
 import heroImg from '../assets/heroImg.png';
 import { useAuthStore } from '../store/authStore';
 import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 const Herosection = () => {
   const videoRef = useRef(null);
@@ -48,6 +49,7 @@ const Herosection = () => {
                 if (user?.isSubscribed) {
                   window.location.href = import.meta.env.VITE_STRIPE_YEARLY_PLAN_LINK;
                 }else{
+                  toast.error("Login or signup to subscribe")
                    navigate('/login')
                 }
               }}
