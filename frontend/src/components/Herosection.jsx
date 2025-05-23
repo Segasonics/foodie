@@ -2,11 +2,12 @@ import { useEffect, useRef } from 'react';
 import foodie from '../assets/videos/foodie.mp4';
 import heroImg from '../assets/heroImg.png';
 import { useAuthStore } from '../store/authStore';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Herosection = () => {
   const videoRef = useRef(null);
   const { user } = useAuthStore();
+  const navigate =useNavigate()
 
   useEffect(() => {
     if (videoRef.current) {
@@ -44,8 +45,10 @@ const Herosection = () => {
             <p className="text-lg md:text-xl font-medium mb-4">Subscribe for 1 year to unlock full access to all recipes and premium features</p>
             <button
               onClick={() => {
-                if (!user?.isSubscribed) {
+                if (user?.isSubscribed) {
                   window.location.href = import.meta.env.VITE_STRIPE_YEARLY_PLAN_LINK;
+                }else{
+                   navigate('/login')
                 }
               }}
               disabled={user?.isSubscribed}
