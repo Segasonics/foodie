@@ -22,8 +22,8 @@ export const stripeWebhook = async (req, res) => {
           event.data.object.id,
           { expand: ['line_items'] }//line items are items bought bought by the customer
         );
-        console.log("session",session)
-        const customerId = session.customer;
+
+        const customerId = session.customer; // under session there is an info about customer and customer details
         const customerDetails = session.customer_details;
 
         if (customerDetails?.email) {
@@ -39,7 +39,7 @@ export const stripeWebhook = async (req, res) => {
 
           for (const item of lineItems) {
             const priceId = item.price?.id;
-            const isSubscription = item.price?.type === 'recurring';
+            const isSubscription = item.price?.type === 'recurring';//check if it is subscription based or one time payment
 
             if (isSubscription) {
               let endDate = new Date();

@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 const Herosection = () => {
   const videoRef = useRef(null);
-  const {user}=useAuthStore();
+  const { user } = useAuthStore();
 
   useEffect(() => {
     if (videoRef.current) {
@@ -42,13 +42,22 @@ const Herosection = () => {
 
           <div className="backdrop-blur-sm bg-white/10 border border-white/20 rounded-xl p-6 max-w-md w-full shadow-lg">
             <p className="text-lg md:text-xl font-medium mb-4">Subscribe for 1 year to unlock full access to all recipes and premium features</p>
-            <Link
-              to={import.meta.env.VITE_STRIPE_YEARLY_PLAN_LINK}
-              disabled={user && user.isSubscribed === true}             
-              className={`${user && user?.isSubscribed ?'bg-gray-200 transition-none' :'bg-yellow-400 cursor-pointer hover:bg-yellow-500 transition-all duration-300 hover:scale-105'} text-black font-bold py-3 px-8 rounded-full shadow-md`}
+            <button
+              onClick={() => {
+                if (!user?.isSubscribed) {
+                  window.location.href = import.meta.env.VITE_STRIPE_YEARLY_PLAN_LINK;
+                }
+              }}
+              disabled={user?.isSubscribed}
+              className={`py-3 px-8 rounded-full font-bold shadow-md text-black transition-all duration-300 
+    ${user?.isSubscribed
+                  ? 'bg-gray-200 cursor-not-allowed'
+                  : 'bg-yellow-400 hover:bg-yellow-500 hover:scale-105 cursor-pointer'
+                }`}
             >
-             {user && user?.isSubscribed ? '✓ Subscribed' : ' Subscribe Now '}
-            </Link>
+              {user?.isSubscribed ? '✓ Subscribed' : 'Subscribe Now'}
+            </button>
+
           </div>
 
           <div className="absolute bottom-8 animate-bounce">
