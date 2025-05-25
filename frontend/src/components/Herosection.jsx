@@ -8,7 +8,6 @@ import toast from 'react-hot-toast';
 const Herosection = () => {
   const videoRef = useRef(null);
   const { user } = useAuthStore();
-  const navigate =useNavigate()
 
   useEffect(() => {
     if (videoRef.current) {
@@ -18,6 +17,13 @@ const Herosection = () => {
     }
   }, []);
 
+  const handleButtonClick=()=>{
+    if(!user){
+      toast.error("Login or sign up to subscribe");
+      return;
+    }
+    window.location.href = import.meta.env.VITE_STRIPE_YEARLY_PLAN_LINK;
+  }
   return (
     <>
       <section id='home' className="relative h-[600px] overflow-hidden">
@@ -45,14 +51,7 @@ const Herosection = () => {
           <div className="backdrop-blur-sm bg-white/10 border border-white/20 rounded-xl p-6 max-w-md w-full shadow-lg">
             <p className="text-lg md:text-xl font-medium mb-4">Subscribe for 1 year to unlock full access to all recipes and premium features</p>
             <button
-              onClick={() => {
-                if (user?.isSubscribed) {
-                  window.location.href = import.meta.env.VITE_STRIPE_YEARLY_PLAN_LINK;
-                }else{
-                  toast.error("Login or signup to subscribe")
-                   navigate('/login')
-                }
-              }}
+              onClick={handleButtonClick}
               disabled={user?.isSubscribed}
               className={`py-3 px-8 rounded-full font-bold shadow-md text-black transition-all duration-300 
     ${user?.isSubscribed
